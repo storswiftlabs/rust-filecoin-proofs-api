@@ -29,6 +29,31 @@ pub fn generate_candidates(
     Ok(candidates_v1)
 }
 
+pub fn generate_remote_candidates(
+    randomness: &ChallengeSeed,
+    challenge_count: u64,
+    replicas: &BTreeMap<SectorId, PrivateReplicaInfo>,
+    prover_id: ProverId,
+) -> Result<Vec<Candidate>> {
+    let (replicas_v1, config_v1) = split_replicas(replicas)?;
+    ensure!(!replicas_v1.is_empty(), "missing v1 replicas");
+
+    let candidates_v1 = filecoin_proofs_v1::generate_retmote_candidates(
+        config_v1.expect("checked before"),
+        randomness,
+        challenge_count,
+        from_raw_parts(challenge_indexes, indexes_len),
+        from_raw_parts(sectorids_indexes, sectorids_len),
+        &replicas_v1,
+        prover_id,
+    )?;
+
+    // once there are multiple versions, merge them before returning
+
+    Ok(candidates_v1)
+}
+
+
 pub fn finalize_ticket(partial_ticket: &[u8; 32]) -> Result<[u8; 32]> {
     filecoin_proofs_v1::finalize_ticket(partial_ticket)
 }
