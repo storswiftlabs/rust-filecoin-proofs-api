@@ -1,5 +1,4 @@
 use std::collections::BTreeMap;
-use std::slice::from_raw_parts;
 
 use anyhow::{ensure, Result};
 
@@ -127,21 +126,21 @@ fn split_replicas(
             access,
             comm_r,
             cache_dir,
-            replica_path,
         } = info;
 
         use RegisteredPoStProof::*;
 
         match registered_proof {
-            StackedDrg2KiBV1 | StackedDrg8MiBV1 | StackedDrg512MiBV1 | StackedDrg32GiBV1 => {
+            StackedDrg1KiBV1 | StackedDrg16MiBV1 | StackedDrg256MiBV1 | StackedDrg1GiBV1
+            | StackedDrg32GiBV1 => {
                 if config_v1.is_none() {
                     config_v1 = Some(registered_proof.as_v1_config());
                 }
 
                 let info_v1 = filecoin_proofs_v1::PrivateReplicaInfo::new(
-                    replica_path.into(),
+                    access.clone(),
                     *comm_r,
-                    cache_dir.into(),
+                    cache_dir.clone(),
                 )?;
                 replicas_v1.insert(*id, info_v1);
             }
@@ -168,7 +167,8 @@ fn split_public_replicas(
 
         use RegisteredPoStProof::*;
         match registered_proof {
-            StackedDrg2KiBV1 | StackedDrg8MiBV1 | StackedDrg512MiBV1 | StackedDrg32GiBV1 => {
+            StackedDrg1KiBV1 | StackedDrg16MiBV1 | StackedDrg256MiBV1 | StackedDrg1GiBV1
+            | StackedDrg32GiBV1 => {
                 if config_v1.is_none() {
                     config_v1 = Some(registered_proof.as_v1_config());
                 }
