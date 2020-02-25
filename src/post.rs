@@ -1,8 +1,6 @@
 use std::collections::BTreeMap;
 use std::slice::from_raw_parts;
 
-use libc;
-
 use anyhow::{ensure, Result};
 
 use crate::{
@@ -35,10 +33,8 @@ pub fn generate_candidates(
 pub fn generate_remote_candidates(
     randomness: &ChallengeSeed,
     challenge_count: u64,
-    challenge_indexes: *const u64,
-    indexes_len: libc::size_t,
-    sectorids_indexes: *const u64,
-    sectorids_len: libc::size_t,
+    challenge_indexes: &[u64],
+    sector_ids: &[u64],
     replicas: &BTreeMap<SectorId, PrivateReplicaInfo>,
     prover_id: ProverId,
 ) -> Result<Vec<Candidate>> {
@@ -49,8 +45,8 @@ pub fn generate_remote_candidates(
         config_v1.expect("checked before"),
         randomness,
         challenge_count,
-        from_raw_parts(challenge_indexes, indexes_len),
-        from_raw_parts(sectorids_indexes, sectorids_len),
+        challenge_indexes,
+        sector_ids,
         &replicas_v1,
         prover_id,
     )?;
