@@ -138,10 +138,9 @@ fn split_replicas(
                 }
 
                 let info_v1 = filecoin_proofs_v1::PrivateReplicaInfo::new(
-                    access.clone(),
+                    replica_path.into(),
                     *comm_r,
                     cache_dir.into(),
-                    replica_path.into(),
                 )?;
                 replicas_v1.insert(*id, info_v1);
             }
