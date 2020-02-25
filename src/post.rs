@@ -1,7 +1,7 @@
 use std::collections::BTreeMap;
 use std::slice::from_raw_parts;
 
-use std::libc;
+use libc;
 
 use anyhow::{ensure, Result};
 
@@ -45,7 +45,7 @@ pub fn generate_remote_candidates(
     let (replicas_v1, config_v1) = split_replicas(replicas)?;
     ensure!(!replicas_v1.is_empty(), "missing v1 replicas");
 
-    let candidates_v1 = filecoin_proofs_v1::generate_retmote_candidates(
+    let candidates_v1 = filecoin_proofs_v1::generate_remote_candidates(
         config_v1.expect("checked before"),
         randomness,
         challenge_count,
