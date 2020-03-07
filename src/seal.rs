@@ -45,6 +45,7 @@ pub struct SealCommitPhase2Output {
 
 pub fn seal_pre_commit_phase1<R, S, T>(
     registered_proof: RegisteredSealProof,
+    commd: Commitment,
     cache_path: R,
     in_path: S,
     out_path: T,
@@ -65,6 +66,7 @@ where
             let config = registered_proof.as_v1_config();
             let output = filecoin_proofs_v1::seal_pre_commit_phase1(
                 config,
+                commd,
                 cache_path,
                 in_path,
                 out_path,
