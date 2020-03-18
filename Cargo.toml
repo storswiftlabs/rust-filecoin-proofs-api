@@ -13,6 +13,6 @@ serde = "1.0.104"
 
 [dependencies.filecoin-proofs-v1]
 version = "1.0.0-alpha.0"
-git = "https://github.com/marco-storswift/rust-fil-proofs"
+git = "git://github.com/marco-storswift/rust-fil-proofs"
 branch = "master"
 package = "filecoin-proofs"
