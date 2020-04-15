@@ -4,7 +4,7 @@ version = "0.1.0"
 authors = ["dignifiedquire <me@dignifiedquire.com>"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/marco-storswift/rust-filecoin-proofs-api"
+repository = "https://github.com/storswiftlabs/rust-filecoin-proofs-api"
 readme = "README.md"
 
 [dependencies]
@@ -14,6 +14,6 @@ paired = "0.18.0"
 
 [dependencies.filecoin-proofs-v1]
 version = "1.0.0-alpha.0"
-git = "https://github.com/marco-storswift/rust-fil-proofs"
+git = "https://github.com/storswiftlabs/rust-fil-proofs"
 branch = "master"
 package = "filecoin-proofs"
