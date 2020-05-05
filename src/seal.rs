@@ -245,6 +245,7 @@ pub fn clear_cache(sector_size: u64, cache_path: &Path) -> Result<()> {
 
 pub fn seal_pre_commit_phase1<R, S, T>(
     registered_proof: RegisteredSealProof,
+    commd: Commitment,
     cache_path: R,
     in_path: S,
     out_path: T,
@@ -267,6 +268,7 @@ where
         u64::from(registered_proof.sector_size()),
         seal_pre_commit_phase1_inner,
         registered_proof,
+        commd,
         cache_path.as_ref(),
         in_path.as_ref(),
         out_path.as_ref(),
@@ -279,6 +281,7 @@ where
 
 fn seal_pre_commit_phase1_inner<Tree: 'static + MerkleTreeTrait>(
     registered_proof: RegisteredSealProof,
+    commd: Commitment,
     cache_path: &Path,
     in_path: &Path,
     out_path: &Path,
@@ -291,6 +294,7 @@ fn seal_pre_commit_phase1_inner<Tree: 'static + MerkleTreeTrait>(
 
     let output = filecoin_proofs_v1::seal_pre_commit_phase1::<_, _, _, Tree>(
         config,
+        commd,
         cache_path,
         in_path,
         out_path,
