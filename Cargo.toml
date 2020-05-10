@@ -10,10 +10,10 @@ readme = "README.md"
 [dependencies]
 anyhow = "1.0.26"
 serde = "1.0.104"
-paired = "0.19.1"
+paired = "0.19.0"
 
 [dependencies.filecoin-proofs-v1]
 version = "1.0.0-alpha.0"
 git = "https://github.com/storswiftlabs/rust-fil-proofs"
-rev = "e3c1e95044c1fde19d7d2555debe6149a58d67b5"
+rev = "9375aa2590f435280ed4faf44b1641e9d9a38bd4"
 package = "filecoin-proofs"
