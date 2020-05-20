@@ -15,5 +15,5 @@ paired = "0.19.0"
 [dependencies.filecoin-proofs-v1]
 version = "1.0.0-alpha.0"
 git = "https://github.com/storswiftlabs/rust-fil-proofs"
-rev = "2914e2871a4e89f1d7b8c8f6e77c6c2bf019ead1"
+rev = "f9582ec1834f7fdc74b8cecdb1a83beb70272aa2"
 package = "filecoin-proofs"
