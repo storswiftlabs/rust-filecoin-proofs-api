@@ -244,6 +244,7 @@ fn generate_window_post_inner<Tree: 'static + MerkleTreeTrait>(
 
     Ok(vec![(registered_proof_v1, posts_v1)])
 }
+
 pub fn generate_partial_window_post(
     randomness: &ChallengeSeed,
     replicas: &BTreeMap<SectorId, PrivateReplicaInfo>,
@@ -323,7 +324,7 @@ fn generate_partial_window_post_inner<Tree: 'static + MerkleTreeTrait>(
 
 pub fn generate_final_window_post(
     randomness: &ChallengeSeed,
-    replicas: &BTreeMap<SectorId, PrivateReplicaInfo>,
+    replicas: &BTreeMap<SectorId, PublicReplicaInfo>,
     prover_id: ProverId,
     all_proofs: &Vec<&[u8]>,
 ) -> Result<Vec<(RegisteredPoStProof, SnarkProof)>> {
@@ -352,30 +353,24 @@ pub fn generate_final_window_post(
 fn generate_final_window_post_inner<Tree: 'static + MerkleTreeTrait>(
     registered_proof_v1: RegisteredPoStProof,
     randomness: &ChallengeSeed,
-    replicas: &BTreeMap<SectorId, PrivateReplicaInfo>,
+    replicas: &BTreeMap<SectorId, PublicReplicaInfo>,
     prover_id: ProverId,
     all_proofs: &Vec<&[u8]>,
 ) -> Result<Vec<(RegisteredPoStProof, SnarkProof)>> {
     let mut replicas_v1 = BTreeMap::new();
 
     for (id, info) in replicas.iter() {
-        let PrivateReplicaInfo {
+        let PublicReplicaInfo {
             registered_proof,
             comm_r,
-            cache_dir,
-            replica_path,
         } = info;
 
         ensure!(
             registered_proof == &registered_proof_v1,
             "can only generate the same kind of PoSt"
         );
-        let info_v1 = filecoin_proofs_v1::PrivateReplicaInfo::new(
-            replica_path.clone(),
-            *comm_r,
-            cache_dir.into(),
-        )?;
 
+        let info_v1 = filecoin_proofs_v1::PublicReplicaInfo::new(*comm_r)?;
         replicas_v1.insert(*id, info_v1);
     }
 
