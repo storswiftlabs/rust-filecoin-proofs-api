@@ -248,7 +248,7 @@ pub fn generate_partial_window_post(
     randomness: &ChallengeSeed,
     replicas: &BTreeMap<SectorId, PrivateReplicaInfo>,
     prover_id: ProverId,
-    changeindexes: &[usize],
+    changeindexes: &[u64],
 ) -> Result<Vec<(RegisteredPoStProof, SnarkProof)>> {
     ensure!(!replicas.is_empty(), "no replicas supplied");
     let registered_post_proof_type_v1 = replicas
@@ -277,7 +277,7 @@ fn generate_partial_window_post_inner<Tree: 'static + MerkleTreeTrait>(
     randomness: &ChallengeSeed,
     replicas: &BTreeMap<SectorId, PrivateReplicaInfo>,
     prover_id: ProverId,
-    changeindexes: &[usize],
+    changeindexes: &[u64],
 ) -> Result<Vec<(RegisteredPoStProof, SnarkProof)>> {
     let mut replicas_v1 = BTreeMap::new();
 
@@ -313,14 +313,19 @@ fn generate_partial_window_post_inner<Tree: 'static + MerkleTreeTrait>(
 
     // once there are multiple versions, merge them before returning
 
-    Ok(vec![(registered_proof_v1, posts_v1)])
+    let mut proofs = Vec::new();
+    for proof in posts_v1 {
+        proofs.push((registered_proof_v1, proof));
+    }
+
+    Ok(proofs)
 }
 
 pub fn generate_final_window_post(
     randomness: &ChallengeSeed,
     replicas: &BTreeMap<SectorId, PrivateReplicaInfo>,
     prover_id: ProverId,
-    all_proofs: &[(RegisteredPoStProof, &[u8])],
+    all_proofs: &Vec<&[u8]>,
 ) -> Result<Vec<(RegisteredPoStProof, SnarkProof)>> {
     ensure!(!replicas.is_empty(), "no replicas supplied");
     let registered_post_proof_type_v1 = replicas
@@ -349,7 +354,7 @@ fn generate_final_window_post_inner<Tree: 'static + MerkleTreeTrait>(
     randomness: &ChallengeSeed,
     replicas: &BTreeMap<SectorId, PrivateReplicaInfo>,
     prover_id: ProverId,
-    all_proofs: &[(RegisteredPoStProof, &[u8])],
+    all_proofs: &Vec<&[u8]>,
 ) -> Result<Vec<(RegisteredPoStProof, SnarkProof)>> {
     let mut replicas_v1 = BTreeMap::new();
 
