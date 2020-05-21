@@ -248,8 +248,8 @@ pub fn generate_partial_window_post(
     randomness: &ChallengeSeed,
     replicas: &BTreeMap<SectorId, PrivateReplicaInfo>,
     prover_id: ProverId,
-    indexes: &[usize],
-) -> Result<Vec<(RegisteredPoStProof, Vec<Vec<String>>)>> {
+    changeindexes: &[usize],
+) -> Result<Vec<(RegisteredPoStProof, SnarkProof)>> {
     ensure!(!replicas.is_empty(), "no replicas supplied");
     let registered_post_proof_type_v1 = replicas
         .values()
@@ -268,7 +268,7 @@ pub fn generate_partial_window_post(
         randomness,
         replicas,
         prover_id,
-        indexes,
+        changeindexes,
     )
 }
 
@@ -277,8 +277,8 @@ fn generate_partial_window_post_inner<Tree: 'static + MerkleTreeTrait>(
     randomness: &ChallengeSeed,
     replicas: &BTreeMap<SectorId, PrivateReplicaInfo>,
     prover_id: ProverId,
-    indexes: &[usize],
-) -> Result<Vec<(RegisteredPoStProof, Vec<Vec<String>>)>> {
+    changeindexes: &[usize],
+) -> Result<Vec<(RegisteredPoStProof, SnarkProof)>> {
     let mut replicas_v1 = BTreeMap::new();
 
     for (id, info) in replicas.iter() {
@@ -308,7 +308,7 @@ fn generate_partial_window_post_inner<Tree: 'static + MerkleTreeTrait>(
         randomness,
         &replicas_v1,
         prover_id,
-        indexes,
+        changeindexes,
     )?;
 
     // once there are multiple versions, merge them before returning
@@ -320,7 +320,7 @@ pub fn generate_final_window_post(
     randomness: &ChallengeSeed,
     replicas: &BTreeMap<SectorId, PrivateReplicaInfo>,
     prover_id: ProverId,
-    all_proofs: &Vec<Vec<String>>,
+    all_proofs: &[(RegisteredPoStProof, &[u8])],
 ) -> Result<Vec<(RegisteredPoStProof, SnarkProof)>> {
     ensure!(!replicas.is_empty(), "no replicas supplied");
     let registered_post_proof_type_v1 = replicas
@@ -349,7 +349,7 @@ fn generate_final_window_post_inner<Tree: 'static + MerkleTreeTrait>(
     randomness: &ChallengeSeed,
     replicas: &BTreeMap<SectorId, PrivateReplicaInfo>,
     prover_id: ProverId,
-    all_proofs: &Vec<Vec<String>>,
+    all_proofs: &[(RegisteredPoStProof, &[u8])],
 ) -> Result<Vec<(RegisteredPoStProof, SnarkProof)>> {
     let mut replicas_v1 = BTreeMap::new();
 
