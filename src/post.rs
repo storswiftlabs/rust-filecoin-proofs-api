@@ -393,7 +393,7 @@ fn generate_partial_winning_post_inner<Tree: 'static + MerkleTreeTrait>(
 
 pub fn generate_final_winning_post(
     randomness: &ChallengeSeed,
-    replicas: &BTreeMap<SectorId, PrivateReplicaInfo>,
+    replicas: &BTreeMap<SectorId, PublicReplicaInfo>,
     prover_id: ProverId,
     all_proofs: &Vec<&[u8]>,
 ) -> Result<Vec<(RegisteredPoStProof, SnarkProof)>> {
