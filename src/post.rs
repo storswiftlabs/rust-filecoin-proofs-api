@@ -418,7 +418,7 @@ pub fn generate_final_winning_post(
         all_proofs,
     )
 }
-fn generate_final_wining_post_inner<Tree: 'static + MerkleTreeTrait>(
+fn generate_final_winning_post_inner<Tree: 'static + MerkleTreeTrait>(
     registered_proof_v1: RegisteredPoStProof,
     randomness: &ChallengeSeed,
     replicas: &BTreeMap<SectorId, PublicReplicaInfo>,
