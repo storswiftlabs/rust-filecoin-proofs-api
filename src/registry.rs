@@ -139,6 +139,7 @@ impl RegisteredSealProof {
                 sector_size: self.sector_size(),
                 partitions: PoRepProofPartitions(self.partitions()),
                 porep_id: self.porep_id(),
+                api_version: ApiVersion::V1_0_0
             }, // _ => panic!("Can only be called on V1 configs"),
         }
     }
@@ -329,6 +330,7 @@ impl RegisteredPoStProof {
                 sector_count: self.sector_count(),
                 challenge_count: constants::WINNING_POST_CHALLENGE_COUNT,
                 priority: true,
+                api_version: ApiVersion::V1_0_0
             },
             StackedDrgWindow2KiBV1
             | StackedDrgWindow8MiBV1
@@ -340,6 +342,7 @@ impl RegisteredPoStProof {
                 sector_count: self.sector_count(),
                 challenge_count: constants::WINDOW_POST_CHALLENGE_COUNT,
                 priority: true,
+                api_version: ApiVersion::V1_0_0
             }, // _ => panic!("Can only be called on V1 configs"),
         }
     }
