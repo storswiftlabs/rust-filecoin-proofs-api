@@ -554,7 +554,7 @@ fn generate_partial_winning_post_inner<Tree: 'static + MerkleTreeTrait>(
     }
 
     ensure!(!replicas_v1.is_empty(), "missing v1 replicas");
-    let posts_v1 = filecoin_proofs_v1::generate_partial_winning_post::<Tree>(
+    let posts_v1 = filecoin_proofs_v1::generate_winning_partial_post::<Tree>(
         &registered_proof_v1.as_v1_config(),
         randomness,
         &replicas_v1,
@@ -625,7 +625,7 @@ fn generate_final_winning_post_inner<Tree: 'static + MerkleTreeTrait>(
     }
 
     ensure!(!replicas_v1.is_empty(), "missing v1 replicas");
-    let posts_v1 = filecoin_proofs_v1::generate_final_winning_post::<Tree>(
+    let posts_v1 = filecoin_proofs_v1::generate_winning_final_post::<Tree>(
         &registered_proof_v1.as_v1_config(),
         randomness,
         &replicas_v1,
@@ -697,7 +697,7 @@ fn generate_partial_window_post_inner<Tree: 'static + MerkleTreeTrait>(
     }
 
     ensure!(!replicas_v1.is_empty(), "missing v1 replicas");
-    let posts_v1 = filecoin_proofs_v1::generate_partial_window_post::<Tree>(
+    let posts_v1 = filecoin_proofs_v1::generate_window_partial_post::<Tree>(
         &registered_proof_v1.as_v1_config(),
         randomness,
         &replicas_v1,
@@ -765,7 +765,7 @@ fn generate_final_window_post_inner<Tree: 'static + MerkleTreeTrait>(
     }
 
     ensure!(!replicas_v1.is_empty(), "missing v1 replicas");
-    let posts_v1 = filecoin_proofs_v1::generate_final_window_post::<Tree>(
+    let posts_v1 = filecoin_proofs_v1::generate_window_final_post::<Tree>(
         &registered_proof_v1.as_v1_config(),
         randomness,
         &replicas_v1,

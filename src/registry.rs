@@ -2,7 +2,7 @@ use std::path::PathBuf;
 
 use anyhow::{ensure, Result};
 use filecoin_proofs_v1::types::{
-    MerkleTreeTrait, PoRepConfig, PoRepProofPartitions, PoStConfig, PoStType, SectorSize,
+    MerkleTreeTrait, PoRepConfig, PoRepProofPartitions, PoStConfig, PoStType, SectorSize, ApiVersion,
 };
 use filecoin_proofs_v1::{constants, with_shape};
 use serde::{Deserialize, Serialize};
