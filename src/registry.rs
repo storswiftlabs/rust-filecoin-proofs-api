@@ -2,9 +2,12 @@ use std::path::PathBuf;
 
 use anyhow::{ensure, Result};
 use filecoin_proofs_v1::types::{
-    MerkleTreeTrait, PoRepConfig, PoRepProofPartitions, PoStConfig, PoStType, SectorSize, ApiVersion,
+    MerkleTreeTrait, PoRepConfig, PoRepProofPartitions, PoStConfig, PoStType, SectorSize,
 };
 use filecoin_proofs_v1::{constants, with_shape};
+
+use storage_proofs_core::ApiVersion;
+
 use serde::{Deserialize, Serialize};
 
 /// Available seal proofs.
@@ -330,7 +333,7 @@ impl RegisteredPoStProof {
                 sector_count: self.sector_count(),
                 challenge_count: constants::WINNING_POST_CHALLENGE_COUNT,
                 priority: true,
-                api_version: ApiVersion::V1_1_0
+                api_version: ApiVersion::V1_0_0
             },
             StackedDrgWindow2KiBV1
             | StackedDrgWindow8MiBV1
