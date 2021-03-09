@@ -16,7 +16,7 @@ serde = "1.0.104"
 #filecoin-hashers = { version = "~1.0.1", default-features = false, features = ["poseidon", "sha256"] , git = "https://github.com/storswiftlabs/rust-fil-proofs.git"}
 filecoin-proofs-v1 = { package = "filecoin-proofs", git = "https://github.com/storswiftlabs/rust-fil-proofs.git", default-features = false, features = ["gpu2"] }
 storage-proofs-core = { git = "https://github.com/storswiftlabs/rust-fil-proofs.git", default-features = false, features = ["gpu2"] }
-fr32 = { git = "https://github.com/storswiftlabs/rust-fil-proofs.git", default-features = false, features = ["gpu2"] }
+fr32 = { git = "https://github.com/storswiftlabs/rust-fil-proofs.git", default-features = false, features = ["gpu"] }
 filecoin-hashers = { git = "https://github.com/storswiftlabs/rust-fil-proofs.git", default-features = false, features = ["poseidon", "sha256"] }
 bellperson = { version = "0.12.3", default-features = false, features = ["gpu"] , git = "https://github.com/storswiftlabs/bellman.git"}
 
